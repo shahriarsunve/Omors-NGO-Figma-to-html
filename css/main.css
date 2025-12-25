@@ -12024,6 +12024,8 @@ body {
 }
 .auth-card--signup {
   width: 531px;
+  margin-top: 104px;
+  margin-bottom: 104px;
 }
 .auth-card--signup h4, .auth-card--signup .h4 {
   margin-bottom: 24px;
@@ -12089,6 +12091,8 @@ body {
   /* Signup card override */
   .auth-card--signup {
     width: 100%;
+    margin-top: 100px;
+    margin-bottom: 100px;
   }
   /* Form container */
   .auth-form {
