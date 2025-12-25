@@ -1,32 +1,34 @@
 .content-card {
-  background: #fff;
-  border: 0.6px solid #bfbfbf;
-  border-radius: 16px;
-  padding: 16px;
+  background: $white;
+  border: 0.6px solid $border-color;
+  border-radius: 1rem;
+  padding: 1rem;
+  overflow-y: auto;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 
   h3 {
     margin: 0;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 500;
   }
 }
 
 .card-actions {
   display: flex;
-  gap: 12px;
+  align-items: center;
+  gap: 0.75rem;
 
   input {
-    height: 36px;
-    padding: 0 12px;
-    border-radius: 8px;
-    border: 1px solid #bfbfbf;
+    height: 2.25rem;
+    padding: 0 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid $border-color;
   }
 }
 
@@ -38,26 +40,216 @@
     text-align: left;
     font-size: 12px;
     text-transform: uppercase;
-    color: #3c6841;
-    padding: 12px;
-    border-bottom: 1px solid #e5e5e5;
+    color: $brand;
+    padding: 0.75rem;
+    border-bottom: 1px solid $border-light;
   }
 
   td {
-    padding: 12px;
-    font-size: 14px;
+    padding: 0.75rem;
+    font-size: 0.875rem;
   }
 
   tbody tr:nth-child(even) {
-    background: #f4faef;
+    background: $bg-body;
   }
 }
 
 .btn-sm {
-  background: #3c6841;
-  color: #fff;
+  background: $brand;
+  color: $white;
   border: none;
-  padding: 6px 12px;
+  padding: 0.375rem 0.75rem;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 0.75rem;
+}
+
+.table-footer {
+  padding: 12px 24px;
+  border-top: 1px solid $line;
+
+  font-size: 14px;
+  font-weight: 400;
+  color: $text;
+
+  background: $white;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.search-input {
+  position: relative;
+  height: 2.25rem;
+}
+
+.search-input i {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  font-size: 0.875rem;
+  color: #6a8270;
+}
+
+.search-input input {
+  height: 100%;
+  width: 16.25rem;
+
+  padding: 0 0.75rem 0 2.25rem;
+  border-radius: 0.5rem;
+  border: 1.5px solid #cccccc;
+  background: #ffffff;
+
+  font-size: 0.875rem;
+  font-family: 'Poppins', sans-serif;
+  color: $text;
+
+  outline: none;
+}
+.btn-outline {
+  height: 2.25rem;
+  padding: 0 1rem;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+
+  border-radius: 0.5rem;
+  border: 1.5px solid $border-strong;
+  background: $bg-header;
+
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: $text;
+
+  cursor: pointer;
+}
+
+.btn-outline i {
+  font-size: 14px;
+}
+
+.btn-outline:hover {
+  background: $bg-success-light;
+}
+
+.search-input input::placeholder {
+  color: $muted-2;
+}
+
+.search-input input:focus {
+  border-color: $brand;
+}
+
+.btn-primary {
+  height: 2.25rem;
+  padding: 0 1.25rem;
+
+  border-radius: 0.5rem;
+  border: none;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  color: $white;
+
+  background: linear-gradient(135deg, $brand, $brand-dark);
+
+  box-shadow:
+    0 0.125rem 0.25rem rgba(0, 0, 0, 0.1),
+    0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  opacity: 0.95;
+}
+
+.recent-section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+
+.recent-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  height: 329px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.recent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 24px;
+  padding: 0.75rem 1.5rem;
+
+  h3 {
+  font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+.btn-view {
+  height: 36px;
+  padding: 0 20px;
+  border-radius: 8px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #3c6841, #2d5030);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.recent-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 16px 24px;
+    border-bottom: 1px solid #f3f4f6;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    span {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .arrow {
+      font-size: 18px;
+      color: #6b7280;
+    }
+  }
+}
+@media (max-width: 900px) {
+  .recent-section {
+    grid-template-columns: 1fr;
+  }
 }

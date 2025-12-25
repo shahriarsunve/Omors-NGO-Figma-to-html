@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard | Dnet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body class="dashboard-page">
+
+  <!-- HEADER -->
+  <div id="header"></div>
+
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <div id="sidebar"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+  <section class="main-content-container">
+
+  <!-- View / Create tabs -->
+  <div class="page-tabs">
+    <button class="tab active">View</button>
+    <button class="tab">Create</button>
+  </div>
+
+  <!-- FORM CARD -->
+  <section class="form-card">
+
+    <!-- FORM HEADER -->
+    <div class="form-header">
+      <h2>Profile Form</h2>
+    </div>
+
+    <!-- FORM BODY -->
+    <form class="form-body">
+
+      <div class="form-group">
+        <label>Organization Name <span>*</span></label>
+        <select></select>
+      </div>
+
+      <div class="form-group">
+        <label>Organization Type <span>*</span></label>
+        <div class="tag-input">
+          <span class="tag">International NGO ✕</span>
+          <span class="tag">Social Enterprise ✕</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Organization Brief <span>*</span></label>
+        <textarea rows="4"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Year Established <span>*</span></label>
+        <select></select>
+      </div>
+
+      <div class="form-group">
+        <label>Address <span>*</span></label>
+        <div class="grid-4">
+          <select><option>Division</option></select>
+          <select><option>District</option></select>
+          <select><option>Upazila</option></select>
+          <select><option>Union</option></select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number <span>*</span></label>
+        <select></select>
+      </div>
+
+      <div class="form-group">
+        <label>Legal Registration Number <span>*</span></label>
+        <input type="text" />
+      </div>
+
+      <div class="form-group">
+        <label>Vision / Mission Statement</label>
+        <textarea rows="4"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Website</label>
+        <input type="text" />
+      </div>
+
+      <div class="form-group">
+        <label>Thematic Areas of Work <span>*</span></label>
+        <div class="tag-input">
+          <span class="tag">Child Protection ✕</span>
+          <span class="tag">Human Rights ✕</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Total Staff Count</label>
+        <input type="number" />
+      </div>
+
+      <div class="form-group">
+        <label>Link to Annual Report</label>
+        <input type="text" />
+      </div>
+
+      <div class="form-group">
+        <label>Official Contact Information <span>*</span></label>
+        <textarea rows="4"></textarea>
+      </div>
+
+      <!-- SAVE -->
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">Save</button>
+      </div>
+
+    </form>
+  </section>
+
+  </section>
+
+
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
+  <script src="../js/include.js"></script>
+</body>
+</html>

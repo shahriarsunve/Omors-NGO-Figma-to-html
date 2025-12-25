@@ -4,10 +4,10 @@
 }
 
 .app-sidebar {
-  width: 240px;
-  background: #eef6ec;
-  border-radius: 12px;
-  margin: 16px;
+  width: 15rem;
+  background: $bg-header;
+  border-radius: 0.75rem;
+  margin: 1rem;
 }
 
 .main-wrapper {
@@ -21,56 +21,60 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
-  background: #edf7ec;
-  border-bottom: 1px solid #d9e4d8;
+  height: 5rem;
+  background: $bg-header;
+  border-bottom: 1px solid $border-soft;
   z-index: 1000;
 }
 
 .app-main {
   flex: 1;
-  margin: 0 16px;
+  margin: 0 1rem;
 }
 
 .app-footer {
   text-align: center;
-  padding: 12px;
-  font-size: 12px;
+  padding: 0.75rem;
+  font-size: 0.75rem;
 }
 body {
-  background-color: #f4faef; /* Figma light green */
+  background-color: $bg-body; /* Figma light green */
   font-family: 'Poppins', sans-serif;
 }
 .dashboard-layout {
   display: flex;
+  //height: calc(100vh - 80px);
 }
 .dashboard-main {
-  margin-left: 21px; // sidebar + gap
-  margin-top: 21px;   // header + gap
+  margin-left: 1.3125rem;
+  margin-top: 1.3125rem;
   display: flex;
-  padding-top: 12px;   /* 🔥 reduce */
-  padding-left: 16px;
-  padding-right: 16px;
-  min-height: calc(100vh - 96px);
-  background: #f6f8f2;
+  padding-top: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  overflow: hidden; 
+  background: $bg-panel-alt;
+  flex: 1;    
+  min-width: 0;  
+  overflow-y: auto;
 }
 
 .dashboard-page {
-  background: #f4f7f0;
+  background: $bg-panel-2;
   min-height: 100vh;
 }
 
 #sidebar {
-  width: 240px;
-  min-height: calc(100vh - 80px); // header height
+  width: 15rem;
+  min-height: calc(100vh - 5rem); // header height
 }
 
 #header {
-  height: 80px;
+  height: 5rem;
 }
 
 #footer {
-  padding: 12px 0;
+  padding: 0.75rem 0;
   text-align: center;
-  font-size: 12px;
+  font-size: 0.75rem;
 }

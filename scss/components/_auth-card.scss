@@ -259,3 +259,80 @@
   }
 
 }
+
+
+
+/* =========================
+   MOBILE RESPONSIVE (PHONES)
+   ========================= */
+@media (max-width: 576px) {
+
+  .auth-wrapper {
+    padding: 16px;
+  }
+
+  .auth-card {
+    width: 100%;              // full width
+    padding: 20px 16px 12px;
+    border-radius: 10px;
+  }
+
+  /* Signup card override */
+  .auth-card--signup {
+    width: 100%;
+  }
+
+  /* Form container */
+  .auth-form {
+    width: 100%;
+  }
+
+  /* Inputs & selects */
+  .form-control,
+  .form-select {
+    width: 100%;
+    height: 44px;
+    font-size: 14px;
+  }
+
+  /* Phone input group */
+  .input-group {
+    flex-wrap: nowrap;
+
+    .input-group-text {
+      font-size: 13px;
+      padding: 0 10px;
+    }
+  }
+
+  /* Button */
+  .btn-auth {
+    width: 100%;
+    height: 40px;
+    font-size: 15px;
+  }
+
+  /* Title */
+  h4 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  /* Terms text */
+  .auth-terms {
+    align-items: flex-start;
+
+    .form-check-label {
+      font-size: 11px;
+      line-height: 1.3;
+    }
+  }
+
+  /* Footer */
+  .auth-card__footer {
+    font-size: 11px;
+    padding: 0 8px;
+    text-align: center;
+  }
+}
+

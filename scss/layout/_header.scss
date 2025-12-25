@@ -1,45 +1,45 @@
 .app-header {
-  height: 80px;
-  background: #edf7ec;
-  border: 0.6px solid #bfbfbf;
-  border-radius: 12px;
-  margin: 18px;
+  height: 5rem;
+  background: $bg-header;
+  border: 0.6px solid $border-color;
+  border-radius: 0.75rem;
+  margin: 1.125rem;
 }
 
 .header-logo {
-  height: 40px;
+  height: 2.5rem;
 }
 
 .search-box {
-  width: 450px;
-  height: 50px;
+  width: 28.125rem;
+  height: 3.125rem;
   position: relative;
-  margin-right: 18px;
+  margin-right: 1.125rem;
 
   .form-control {
-    height: 50px;
-    padding-left: 44px;
-    border-radius: 12px;
-    border: 1px solid #bfbfbf;
+    height: 3.125rem;
+    padding-left: 2.75rem;
+    border-radius: 0.75rem;
+    border: 1px solid $border-color;
     font-size: 14px;
   }
 
   .search-icon {
     position: absolute;
     top: 50%;
-    left: 14px;
+    left: 0.875rem;
     transform: translateY(-50%);
-    color: #777;
+    color: $muted-gray;
   }
 }
 
 
 .icon-btn {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  border: 1px solid #bfbfbf;
-  background: #fff;
+  width: 3.125rem;
+  height: 3.125rem;
+  border-radius: 1.5625rem;
+  border: 1px solid $border-color;
+  background: $white;
 
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@
 
 
 .user-info {
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 300;
   line-height: 1.2;
   text-align: right;
@@ -58,12 +58,12 @@
   }
 
   .user-email {
-    color: #666;
+    color: $muted-light;
   }
 }
 
 .user-avatar {
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
 }
