@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard | Dnet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body class="dashboard-page">
+
+  <!-- HEADER -->
+  <div id="header"></div>
+
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <div id="sidebar"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-main">
+  <section class="main-content-container">
+
+    <section class="worktype-section">
+      <div class="worktype-card gradient-purple">
+        <div class="card-icon">
+          <i class="bi bi-layers"></i>
+        </div>
+        <h2>12</h2>
+        <p>Research Based Work</p>
+      </div>
+
+      <div class="worktype-card gradient-green">
+        <div class="card-icon">
+          <i class="bi bi-layers"></i>
+        </div>
+        <h2>17</h2>
+        <p>Program Based Work</p>
+      </div>
+
+      <div class="worktype-card gradient-red">
+        <div class="card-icon">
+          <i class="bi bi-layers"></i>
+        </div>
+        <h2>35</h2>
+        <p>Event-Based Work</p>
+      </div>
+
+      <div class="worktype-card gradient-blue">
+        <div class="card-icon">
+          <i class="bi bi-layers"></i>
+        </div>
+        <h2>25</h2>
+        <p>Training-Based Work</p>
+      </div>
+    </section>
+    <section class="content-card">
+      <div class="card-header">
+        <h3>CSO Organizations</h3>
+
+        <div class="card-actions">
+          <input type="text" placeholder="Search..." />
+          <button class="btn-outline">Advance Search</button>
+          <button class="btn-primary">View All</button>
+        </div>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Serial</th>
+            <th>Organization Name</th>
+            <th>Year Established</th>
+            <th>Address</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Save the Children</td>
+            <td>2007</td>
+            <td>Savar, Dhaka</td>
+            <td><button class="btn-sm">Details</button></td>
+          </tr>
+          <!-- repeat -->
+        </tbody>
+      </table>
+    </section>
+
+</section>
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
+  <script src="../js/include.js"></script>
+</body>
+</html>

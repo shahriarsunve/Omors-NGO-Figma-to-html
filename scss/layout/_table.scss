@@ -1,0 +1,63 @@
+.content-card {
+  background: #fff;
+  border: 0.6px solid #bfbfbf;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
+
+.card-actions {
+  display: flex;
+  gap: 12px;
+
+  input {
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid #bfbfbf;
+  }
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #3c6841;
+    padding: 12px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  td {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f4faef;
+  }
+}
+
+.btn-sm {
+  background: #3c6841;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+}

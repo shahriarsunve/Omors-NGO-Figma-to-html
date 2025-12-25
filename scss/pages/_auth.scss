@@ -1,0 +1,11 @@
+.auth-page {
+  min-height: 100vh;
+}
+
+.auth-wrapper {
+  min-height: 100vh;
+  background: url('../assets/images/bg.jpg') center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
