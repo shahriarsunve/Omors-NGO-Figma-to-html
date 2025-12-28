@@ -41,13 +41,30 @@
         </div>
 
         <section id="projects-table" class="tab-content active">
-          <div class="filter-container">
-            <select id="filterType">
-              <option value="">All Types</option>
-              <option value="Research-Based Work">Research-Based Work</option>
-              <option value="Program-Based Work">Program-Based Work</option>
-            </select>
-            <input id="customSearch" placeholder="Search projects..." />
+          <div class="table-controls-top">
+            <div class="results-info">
+              <span id="topInfo">Showing 0 of 0 results</span>
+            </div>
+            
+            <div class="filter-search-group">
+              <div class="filter-item">
+                <label>Filter By Type:</label>
+                <select id="filterType" class="select-custom">
+                  <option value="">All</option>
+                  <option value="Research-Based Work">Research-Based Work</option>
+                  <option value="Program-Based Work">Program-Based Work</option>
+                </select>
+              </div>
+
+              <div class="search-item">
+                <div class="search-input-wrapper">
+                  <i class="bi bi-search"></i>
+                  <input id="customSearch" placeholder="Search..." />
+                </div>
+                <!-- <button id="btnSearch" class="btn-table-action search">Search</button>
+                <button id="btnReset" class="btn-table-action reset">Reset</button> -->
+              </div>
+            </div>
           </div>
 
           <table id="projectsTable" class="projects-table" style="width:100%">
@@ -215,9 +232,10 @@
       const table = $('#projectsTable').DataTable({
         searching: true,
         paging: true,
-        info: false,
+        info: true,
         lengthChange: false,
-        dom: 't<"dt-pagination"p>',
+        pagingType: "full_numbers",
+        dom: 't<"dt-footer-container"ip>',//'it<"dt-footer-container"ip>',
         language: {
                 paginate: {
                     first: "«",
@@ -229,6 +247,7 @@
           drawCallback: function () {
           const api = this.api();
           const info = api.page.info();
+          $('.dt-footer-container').css('display', 'flex');
           $('.dataTables_info').html(
               `Showing page ${info.page + 1} of ${info.pages} pages`
           );
@@ -274,6 +293,33 @@
     // Handle include.js custom event if needed
     document.addEventListener('partialsLoaded', function() {
         console.log("Headers and Sidebars loaded.");
+    });
+
+
+    table.on('draw', function() {
+        const info = table.page.info();
+        $('#topInfo').text(`Showing ${info.recordsDisplay} of ${info.recordsTotal} results`);
+    });
+
+    // Trigger search only on button click (or Enter key)
+    $('#btnSearch').on('click', function() {
+        table.search($('#customSearch').val()).draw();
+    });
+
+    $('#customSearch').on('keypress', function(e) {
+        if(e.which == 13) $('#btnSearch').click();
+    });
+
+    // Reset everything
+    $('#btnReset').on('click', function() {
+        $('#customSearch').val('');
+        $('#filterType').val('');
+        table.search('').column(2).search('').draw();
+    });
+
+    // Filter dropdown
+    $('#filterType').on('change', function () {
+        table.column(2).search(this.value).draw();
     });
   </script>
 <style>
@@ -368,6 +414,100 @@
 .dataTables_wrapper .dataTables_paginate .ellipsis {
     padding: 0 8px;
     color: #94A3B8;
+}
+
+
+/* Top Bar Layout */
+.table-controls-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.filter-search-group {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Gap between filter and search */
+}
+
+/* Filter Dropdown (164px per image e03284) */
+.filter-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-item label {
+    font-size: 12px;
+    color: #64748B;
+    white-space: nowrap;
+}
+
+.select-custom {
+    width: 164px;
+    height: 32px;
+    border: 1.5px solid #C0CCC1; /* Color from image 9f5ee6 */
+    border-radius: 8px;
+    padding: 0 10px;
+    font-size: 13px;
+    outline: none;
+}
+
+/* Search Bar (240px per image e032da) */
+.search-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 240px;
+}
+
+.search-input-wrapper i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94A3B8;
+}
+
+#customSearch {
+    width: 100%;
+    height: 32px;
+    padding-left: 32px;
+    border: 1.5px solid #C0CCC1;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+}
+
+/* Action Buttons (Search/Reset) */
+.btn-table-action {
+    height: 32px;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #C0CCC1;
+}
+
+.btn-table-action.search {
+    background: #FFFFFF;
+    color: #1E293B;
+}
+
+.btn-table-action.reset {
+    background: #F1F5F9;
+    color: #64748B;
+}
+
+.btn-table-action:hover {
+    background: #E2E8F0;
 }
 </style>
 </body>
