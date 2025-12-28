@@ -2,141 +2,373 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Dashboard | Dnet</title>
+  <title>Projects | Dnet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- Main CSS -->
+  
   <link rel="stylesheet" href="../css/main.css">
+  
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/select2-custom.css">
+
+  <style>
+    /* Quick fix for layout visibility */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .page-tabs .tab.active { font-weight: bold; border-bottom: 2px solid #007bff; }
+    #customSearch { margin-left: 10px; padding: 5px; }
+    .filter-container { margin-bottom: 15px; }
+  </style>
 </head>
 
 <body class="dashboard-page">
 
-  <!-- HEADER -->
   <div id="header"></div>
 
   <div class="dashboard-layout">
 
-    <!-- SIDEBAR -->
     <div id="sidebar"></div>
 
-    <!-- MAIN CONTENT -->
     <main class="dashboard-main">
-  <section class="main-content-container">
+      <section class="main-content-container">
 
-  <!-- View / Create tabs -->
-  <div class="page-tabs">
-    <button class="tab active">View</button>
-    <button class="tab">Create</button>
-  </div>
-
-  <!-- FORM CARD -->
-  <section class="form-card">
-
-    <!-- FORM HEADER -->
-    <div class="form-header">
-      <h2>Profile Form</h2>
-    </div>
-
-    <!-- FORM BODY -->
-    <form class="form-body">
-
-      <div class="form-group">
-        <label>Organization Name <span>*</span></label>
-        <select></select>
-      </div>
-
-      <div class="form-group">
-        <label>Organization Type <span>*</span></label>
-        <div class="tag-input">
-          <span class="tag">International NGO ✕</span>
-          <span class="tag">Social Enterprise ✕</span>
+        <div class="page-tabs">
+          <button class="tab active" data-target="projects-table">View</button>
+          <button class="tab" data-target="projects-form">Create</button>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label>Organization Brief <span>*</span></label>
-        <textarea rows="4"></textarea>
-      </div>
+        <section id="projects-table" class="tab-content active">
+          <div class="filter-container">
+            <select id="filterType">
+              <option value="">All Types</option>
+              <option value="Research-Based Work">Research-Based Work</option>
+              <option value="Program-Based Work">Program-Based Work</option>
+            </select>
+            <input id="customSearch" placeholder="Search projects..." />
+          </div>
 
-      <div class="form-group">
-        <label>Year Established <span>*</span></label>
-        <select></select>
-      </div>
+          <table id="projectsTable" class="projects-table" style="width:100%">
+            <thead>
+              <tr>
+                <th>SERIAL</th>
+                <th>TITLE</th>
+                <th>TYPE</th>
+                <th>THEMATIC FOCUS</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>999-National Emergency Service (NHH)</td>
+                <td>Research-Based Work</td>
+                <td><span class="tag tag-blue">Human Rights</span></td>
+                <td><button class="action-btn">⋯</button></td>
+              </tr>
+                            <tr>
+                <td>1</td>
+                <td>999-National Emergency Service (NHH)</td>
+                <td>Research-Based Work</td>
+                <td><span class="tag tag-blue">Human Rights</span></td>
+                <td><button class="action-btn">⋯</button></td>
+              </tr>
+                            <tr>
+                <td>1</td>
+                <td>999-National Emergency Service (NHH)</td>
+                <td>Research-Based Work</td>
+                <td><span class="tag tag-blue">Human Rights</span></td>
+                <td><button class="action-btn">⋯</button></td>
+              </tr>
+                            <tr>
+                <td>1</td>
+                <td>999-National Emergency Service (NHH)</td>
+                <td>Research-Based Work</td>
+                <td><span class="tag tag-pink">Health</span></td>
+                <td><button class="action-btn">⋯</button></td>
+              </tr>
+            </tbody>
+          </table>
+          </section>
 
-      <div class="form-group">
-        <label>Address <span>*</span></label>
-        <div class="grid-4">
-          <select><option>Division</option></select>
-          <select><option>District</option></select>
-          <select><option>Upazila</option></select>
-          <select><option>Union</option></select>
-        </div>
-      </div>
+          <section id="projects-form"  class="form-card tab-content">
 
-      <div class="form-group">
-        <label>Phone Number <span>*</span></label>
-        <select></select>
-      </div>
+            <!-- FORM HEADER -->
+            <div class="form-header">
+              <h2>Profile Form</h2>
+            </div>
 
-      <div class="form-group">
-        <label>Legal Registration Number <span>*</span></label>
-        <input type="text" />
-      </div>
+            <!-- FORM BODY -->
+            <form class="form-body">
 
-      <div class="form-group">
-        <label>Vision / Mission Statement</label>
-        <textarea rows="4"></textarea>
-      </div>
+              <div class="form-group">
+                <label>Organization Name <span>*</span></label>
+                <select></select>
+              </div>
 
-      <div class="form-group">
-        <label>Website</label>
-        <input type="text" />
-      </div>
+              <div class="form-group">
+                <label>Organization Type <span>*</span></label>
+                <select class="select2" name="organization_type" multiple="multiple" style="width:100%;">
+                  <option value="international_ngo">International NGO</option>
+                  <option value="social_enterprise">Social Enterprise</option>
+                  <option value="government">Government</option>
+                  <option value="community_based">Community Based</option>
+                  <option value="private_sector">Private Sector</option>
+                </select>
+              </div>
 
-      <div class="form-group">
-        <label>Thematic Areas of Work <span>*</span></label>
-        <div class="tag-input">
-          <span class="tag">Child Protection ✕</span>
-          <span class="tag">Human Rights ✕</span>
-        </div>
-      </div>
+              <div class="form-group">
+                <label>Organization Brief <span>*</span></label>
+                <textarea rows="4"></textarea>
+              </div>
 
-      <div class="form-group">
-        <label>Total Staff Count</label>
-        <input type="number" />
-      </div>
+              <div class="form-group">
+                <label>Year Established <span>*</span></label>
+                <select></select>
+              </div>
 
-      <div class="form-group">
-        <label>Link to Annual Report</label>
-        <input type="text" />
-      </div>
+              <div class="form-group">
+                <label>Address <span>*</span></label>
+                <div class="grid-4">
+                  <select><option>Division</option></select>
+                  <select><option>District</option></select>
+                  <select><option>Upazila</option></select>
+                  <select><option>Union</option></select>
+                </div>
+              </div>
 
-      <div class="form-group">
-        <label>Official Contact Information <span>*</span></label>
-        <textarea rows="4"></textarea>
-      </div>
+              <div class="form-group">
+                <label>Phone Number <span>*</span></label>
+                <select></select>
+              </div>
 
-      <!-- SAVE -->
-      <div class="form-actions">
-        <button type="submit" class="btn-primary">Save</button>
-      </div>
+              <div class="form-group">
+                <label>Legal Registration Number <span>*</span></label>
+                <input type="text" />
+              </div>
 
-    </form>
-  </section>
+              <div class="form-group">
+                <label>Vision / Mission Statement</label>
+                <textarea rows="4"></textarea>
+              </div>
 
-  </section>
+              <div class="form-group">
+                <label>Website</label>
+                <input type="text" />
+              </div>
 
+              <div class="form-group">
+                <label>Thematic Areas of Work <span>*</span></label>
+                <select class="select2 thematic-areas" name="thematic_areas[]" multiple="multiple" style="width:100%;">
+                  <option value="child_protection">Child Protection</option>
+                  <option value="human_rights">Human Rights</option>
+                  <option value="education">Education</option>
+                  <option value="health">Health</option>
+                  <option value="gender_based_violence">Gender-based Violence</option>
+                  <option value="livelihoods">Livelihoods</option>
+                  <option value="wash">WASH</option>
+                  <option value="environment">Environment</option>
+                  <option value="governance">Governance</option>
+                  <option value="food_security">Food Security</option>
+                </select>
+              </div>
 
+              <div class="form-group">
+                <label>Total Staff Count</label>
+                <input type="number" />
+              </div>
 
+              <div class="form-group">
+                <label>Link to Annual Report</label>
+                <input type="text" />
+              </div>
+
+              <div class="form-group">
+                <label>Official Contact Information <span>*</span></label>
+                <textarea rows="4"></textarea>
+              </div>
+
+              <!-- SAVE -->
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">Save</button>
+              </div>
+
+            </form>
+          </section>
+      </section>
     </main>
   </div>
 
-  <!-- FOOTER -->
   <div id="footer"></div>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <script src="../js/include.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      
+      // 1. Initialize DataTable and capture instance in 'table' variable
+      const table = $('#projectsTable').DataTable({
+        searching: true,
+        paging: true,
+        info: false,
+        lengthChange: false,
+        dom: 't<"dt-pagination"p>',
+        language: {
+                paginate: {
+                    first: "«",
+                    last: "»",
+                    next: '<i class="bi bi-chevron-right"></i>',
+                    previous: '<i class="bi bi-chevron-left"></i>'
+                }
+          },
+          drawCallback: function () {
+          const api = this.api();
+          const info = api.page.info();
+          $('.dataTables_info').html(
+              `Showing page ${info.page + 1} of ${info.pages} pages`
+          );
+        }
+      });
+
+      // 2. Custom Search Box Logic
+      $('#customSearch').on('keyup', function () {
+        table.search(this.value).draw();
+      });
+
+      // 3. Custom Filter Dropdown (Column 2 is TYPE)
+      $('#filterType').on('change', function () {
+        table.column(2).search(this.value).draw();
+      });
+
+      // 4. Initialize all Select2 elements
+      $('.select2').select2({
+        placeholder: 'Please select',
+        allowClear: true,
+        width: '100%'
+      });
+
+      // 5. Tab Switching Logic using jQuery
+      $('.tab').on('click', function () {
+        const targetId = $(this).data('target');
+        
+        // Update tab buttons
+        $('.tab').removeClass('active');
+        $(this).addClass('active');
+
+        // Update content visibility
+        $('.tab-content').removeClass('active');
+        $('#' + targetId).addClass('active');
+
+        // Fix DataTables column alignment if switched while hidden
+        if(targetId === 'projects-table') {
+          table.columns.adjust().draw();
+        }
+      });
+    });
+
+    // Handle include.js custom event if needed
+    document.addEventListener('partialsLoaded', function() {
+        console.log("Headers and Sidebars loaded.");
+    });
+  </script>
+<style>
+  /* Container alignment */
+.dt-pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+/* Base button style */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 6px !important;
+    padding: 5px 12px !important;
+    margin-left: 5px !important;
+    color: #64748B !important;
+    background: white !important;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #F8FAFC !important;
+    color: #1E293B !important;
+    border-color: #CBD5E1 !important;
+}
+
+/* ACTIVE / Selected page */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #144D29 !important; /* Dark Green from your image */
+    color: white !important;
+    border-color: #144D29 !important;
+}
+
+/* Disabled buttons (dots/arrows) */
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* Style for the Ellipsis (...) */
+.dataTables_wrapper .dataTables_paginate .ellipsis {
+    padding: 0 10px;
+    color: #94A3B8;
+}
+
+/* Container for both Info and Pagination */
+.dt-footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+/* Style the "Showing page X of Y" text */
+.dataTables_info {
+    font-size: 14px;
+    color: #64748B; /* Soft slate grey */
+    font-weight: 400;
+}
+
+/* Pagination Wrapper */
+.dataTables_paginate {
+    display: flex;
+    gap: 4px;
+}
+
+/* Individual Buttons (Refining the previous style) */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 6px !important;
+    padding: 6px 12px !important;
+    background: white !important;
+    color: #334155 !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Dark Green Active Button */
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #144D29 !important; /* Your specific Green */
+    color: white !important;
+    border-color: #144D29 !important;
+}
+
+/* Dots (Ellipsis) style */
+.dataTables_wrapper .dataTables_paginate .ellipsis {
+    padding: 0 8px;
+    color: #94A3B8;
+}
+</style>
 </body>
 </html>

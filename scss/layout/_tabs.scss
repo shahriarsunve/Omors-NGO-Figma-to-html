@@ -1,0 +1,170 @@
+/* ===============================
+   PAGE TABS (View / Create)
+================================ */
+.page-tabs {
+  display: inline-flex;
+  gap: 0px;
+  margin-bottom: 12px;
+}
+
+.page-tabs .tab {
+  height: 25px;
+  padding: 0 16px;
+
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e4b24;
+
+  background: #ffffff;
+  border: 1px solid #cbd5cb;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-tabs .tab:hover {
+  background: #f0f7ee;
+}
+
+.page-tabs .tab.active {
+  background: linear-gradient(
+    180deg,
+    #3c6841 0%,
+    #70c278 100%
+  );
+
+  color: #ffffff;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.25),
+    0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* ===============================
+   TAB CONTENT VISIBILITY
+================================ */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ===============================
+   FORM CARD (matches Figma)
+================================ */
+.form-card {
+  background: #f3faef;
+  border-radius: 12px;
+  border: 1px solid #d1dfd0;
+  overflow: hidden;
+}
+
+.form-header {
+  height: 48px;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+
+  background: linear-gradient(90deg, #5b8f5f, #7fbf7f);
+}
+
+.form-body {
+  padding: 20px;
+}
+
+/* ===============================
+   FORM ELEMENTS
+================================ */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e4b24;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 12px;
+
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5cb;
+  background: #ffffff;
+}
+
+.form-group textarea {
+  height: auto;
+  padding: 12px;
+  resize: vertical;
+}
+
+/* ===============================
+   GRID (Address)
+================================ */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* ===============================
+   SAVE BUTTON
+================================ */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.form-actions .btn-primary {
+  height: 32px;
+  padding: 0 24px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  background: linear-gradient(180deg, #3c6841, #2d5030);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 992px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .page-tabs {
+    width: 100%;
+  }
+
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}

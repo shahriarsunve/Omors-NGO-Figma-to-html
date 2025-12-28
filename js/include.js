@@ -6,6 +6,8 @@ async function loadPartials() {
   document.getElementById("header").innerHTML = header;
   document.getElementById("sidebar").innerHTML = sidebar;
   document.getElementById("footer").innerHTML = footer;
+  // Signal that partials are loaded so pages can initialize UI components
+  document.dispatchEvent(new Event('partialsLoaded'));
 }
 
 loadPartials();

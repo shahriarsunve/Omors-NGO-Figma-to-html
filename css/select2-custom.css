@@ -1,0 +1,40 @@
+/* Base select2 container */
+.select2-container--default .select2-selection--multiple {
+  min-height: 48px;
+  border: 0.5px solid #bfbfbf;
+  border-radius: 8px;
+  padding: 6px 8px;
+  background-color: #ffffff;
+}
+
+/* Selected item (chip) */
+.select2-container--default .select2-selection--multiple
+.select2-selection__choice {
+  background-color: #c0d3bf;
+  border: 1px solid #c0c8cc;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #0d1c0b;
+  margin-top: 4px;
+}
+
+/* Remove X */
+.select2-container--default .select2-selection__choice__remove {
+  color: #5f7f5f;
+  margin-right: 6px;
+  border: none !important;
+  padding: 3px 3px !important;
+}
+
+/* Dropdown */
+.select2-dropdown {
+  border-radius: 8px;
+  border: 0.5px solid #bfbfbf;
+}
+
+/* Focus */
+.select2-container--default.select2-container--focus
+.select2-selection--multiple {
+  border-color: #3c6841;
+}
