@@ -6,28 +6,6 @@
   margin: 1.125rem;
 }
 
-.mobile-menu-btn {
-  display: none;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: none;
-  background: transparent;
-  color: #222;
-  font-size: 1.5rem;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #3c6841;
-  }
-
-  @media (max-width: 768px) {
-    display: flex;
-  }
-}
-
 .header-logo {
   height: 2.5rem;
 }

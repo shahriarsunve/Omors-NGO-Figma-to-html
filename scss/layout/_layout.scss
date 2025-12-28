@@ -43,18 +43,20 @@ body {
 }
 .dashboard-layout {
   display: flex;
+  width: 100%;
   //height: calc(100vh - 80px);
 }
 .dashboard-main {
   margin-left: 1.3125rem;
   margin-top: 1.3125rem;
+  margin-right: 1.3125rem;
+  flex: 1;
   display: flex;
   padding-top: 0.75rem;
   padding-left: 1rem;
   padding-right: 1rem;
   overflow: hidden; 
   background: $bg-panel-alt;
-  flex: 1;    
   min-width: 0;  
   overflow-y: auto;
 }
@@ -66,7 +68,12 @@ body {
 
 #sidebar {
   width: 15rem;
-  min-height: calc(100vh - 5rem); // header height
+  min-height: 70%;
+  transition: width 0.3s ease;
+
+  &.collapsed {
+    width: 4rem !important;
+  }
 }
 
 #header {

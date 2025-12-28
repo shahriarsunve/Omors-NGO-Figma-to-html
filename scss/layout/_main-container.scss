@@ -12,6 +12,12 @@
   box-shadow:
     0.0625rem 0rem 0.125rem rgba(0, 0, 0, 0.15),
     0rem 0.0625rem 0.125rem rgba(0, 0, 0, 0.15);
+  transition: width 0.3s ease;
+}
+
+// When sidebar is collapsed, adjust the width
+#sidebar.collapsed ~ main .main-content-container {
+  width: 100vw;
 }
 
 @media (min-width: 1366px) and (max-width: 1919px) {
