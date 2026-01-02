@@ -12173,12 +12173,6 @@ body {
   margin: 0 1rem;
 }
 
-.app-footer {
-  text-align: center;
-  padding: 0.75rem;
-  font-size: 0.75rem;
-}
-
 body {
   background-color: #f4faef; /* Figma light green */
   font-family: "Poppins", sans-serif;
@@ -12190,18 +12184,12 @@ body {
 }
 
 .dashboard-main {
-  margin-left: 1.3125rem;
-  margin-top: 1.3125rem;
-  margin-right: 1.3125rem;
   flex: 1;
-  display: flex;
-  padding-top: 0.75rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  overflow: hidden;
-  background: #f6f8f2;
-  min-width: 0;
+  margin: 1.3125rem;
+  padding: 1rem;
   overflow-y: auto;
+  background: #f6f8f2;
+  border-radius: 0.75rem;
 }
 
 .dashboard-page {
@@ -12220,12 +12208,6 @@ body {
 
 #header {
   height: 5rem;
-}
-
-#footer {
-  padding: 0.75rem 0;
-  text-align: center;
-  font-size: 0.75rem;
 }
 
 .app-header {
@@ -12292,22 +12274,27 @@ body {
 }
 
 .dashboard-footer {
+  height: 56px;
   background: #edf7ec;
-  border-top: 1px solid #d9e4d8;
+  border: 0.6px solid #d9e4d8;
   border-radius: 12px;
-  padding: 16px 24px;
-  margin-top: 16px;
+  margin: 1rem 1.125rem;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-family: "Poppins", sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   color: #6a8270;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
-.dashboard-footer strong {
-  color: #3c6841;
-  font-weight: 600;
+.dashboard-footer .footer-right {
+  white-space: nowrap;
+}
+
+.dashboard-footer .footer-right {
+  white-space: nowrap;
 }
 
 @media (max-width: 600px) {

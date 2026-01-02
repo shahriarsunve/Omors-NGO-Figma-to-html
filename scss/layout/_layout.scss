@@ -32,11 +32,11 @@
   margin: 0 1rem;
 }
 
-.app-footer {
-  text-align: center;
-  padding: 0.75rem;
-  font-size: 0.75rem;
-}
+// .app-footer {
+//   text-align: center;
+//   padding: 0.75rem;
+//   font-size: 0.75rem;
+// }
 body {
   background-color: $bg-body; /* Figma light green */
   font-family: 'Poppins', sans-serif;
@@ -46,20 +46,31 @@ body {
   width: 100%;
   //height: calc(100vh - 80px);
 }
+// .dashboard-main {
+//   margin-left: 1.3125rem;
+//   margin-top: 1.3125rem;
+//   margin-right: 1.3125rem;
+//   flex: 1;
+//   display: flex;
+//   padding-top: 0.75rem;
+//   padding-left: 1rem;
+//   padding-right: 1rem;
+//   overflow: hidden; 
+//   background: $bg-panel-alt;
+//   min-width: 0;  
+//   overflow-y: auto;
+// }
+
 .dashboard-main {
-  margin-left: 1.3125rem;
-  margin-top: 1.3125rem;
-  margin-right: 1.3125rem;
-  flex: 1;
-  display: flex;
-  padding-top: 0.75rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  overflow: hidden; 
+  flex: 1;                 // 🔑 allows footer to stick bottom
+  margin: 1.3125rem;
+  padding: 1rem;
+
+  overflow-y: auto;        // content scrolls, not footer
   background: $bg-panel-alt;
-  min-width: 0;  
-  overflow-y: auto;
+  border-radius: 0.75rem;
 }
+
 
 .dashboard-page {
   background: $bg-panel-2;
@@ -80,8 +91,7 @@ body {
   height: 5rem;
 }
 
-#footer {
-  padding: 0.75rem 0;
-  text-align: center;
-  font-size: 0.75rem;
-}
+// #footer {
+//   padding: 0.75rem 0;
+//   text-align: center;
+//   font-size: 0.75rem;

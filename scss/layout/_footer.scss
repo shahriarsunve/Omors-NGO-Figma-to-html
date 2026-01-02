@@ -1,24 +1,34 @@
 .dashboard-footer {
-  background: $bg-header;
-  border-top: 1px solid $border-soft;
+  height: 56px;
+
+  background: $bg-header; // #EDF7EC
+  border: 0.6px solid $border-soft; // #BFBFBF
   border-radius: 12px;
 
-  padding: 16px 24px;
-  margin-top: 16px;
+  margin: 1rem 1.125rem; // ≈ 18px from figma
+  padding: 0 24px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   font-family: 'Poppins', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   color: $muted;
+
+  // subtle figma shadow
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
-.dashboard-footer strong {
-  color: $brand;
-  font-weight: 600;
+.dashboard-footer .footer-right {
+  white-space: nowrap;
 }
+
+
+.dashboard-footer .footer-right {
+  white-space: nowrap;
+}
+
 @media (max-width: 600px) {
   .dashboard-footer {
     flex-direction: column;
