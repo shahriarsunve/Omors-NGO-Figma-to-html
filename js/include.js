@@ -82,17 +82,17 @@ loadPartials();
 function setActiveSidebarLink() {
   const currentPath = window.location.pathname;
   const sidebarLinks = document.querySelectorAll('.sidebar-item a');
-debugger
+
   sidebarLinks.forEach(link => {
-    // Get the relative path from the link (e.g., /pages/projects.html)
+
     const linkPath = new URL(link.href).pathname.split('.')[0];
 
-    // Check if the current URL ends with the link's path
+
     if (currentPath.endsWith(linkPath) || currentPath === linkPath) {
-      // Remove active from others just in case
+
       document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
       
-      // Add active to the parent li or div
+
       link.parentElement.classList.add('active');
       
       console.log('Set active tab for:', linkPath);
