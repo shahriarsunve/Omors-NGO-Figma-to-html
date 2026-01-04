@@ -1,11 +1,23 @@
 .sidebar {
-  position: fixed;
+  //position: fixed;
   top: 7.00rem;
   left: 1.125rem;
-
+  //height: 100%;
   width: 15rem;
   //height: calc(100vh - 8.25rem);
 
+  //   height: calc(
+  //   100vh 
+  //   - 7rem        /* header */
+  //   - 56px        /* footer */
+  //   - 2rem        /* footer margin */
+  //   - 1rem        /* bottom breathing space */
+  // );
+
+  //position: absolute; // ❗ not fixed
+  //height: calc(100vh - 7rem);
+  --computed-height: auto;
+  height: var(--computed-height);
   background: $bg-header;
   border: 1px solid $border-color;
   border-radius: 0.75rem;

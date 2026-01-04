@@ -12185,11 +12185,12 @@ body {
 
 .dashboard-main {
   flex: 1;
-  margin: 1.3125rem;
-  padding: 1rem;
+  margin: 1.3125rem 1.3125rem 0 1.3125rem;
+  padding: 1rem 0rem 0rem 1rem;
   overflow-y: auto;
   background: #f6f8f2;
   border-radius: 0.75rem;
+  display: flex;
 }
 
 .dashboard-page {
@@ -12200,6 +12201,8 @@ body {
 #sidebar {
   width: 15rem;
   min-height: 70%;
+  margin-top: 1.125rem;
+  margin-left: 0.6rem;
   transition: width 0.3s ease;
 }
 #sidebar.collapsed {
@@ -12305,10 +12308,11 @@ body {
   }
 }
 .sidebar {
-  position: fixed;
   top: 7rem;
   left: 1.125rem;
   width: 15rem;
+  --computed-height: auto;
+  height: var(--computed-height);
   background: #edf7ec;
   border: 1px solid #bfbfbf;
   border-radius: 0.75rem;
@@ -12792,7 +12796,6 @@ body {
   width: calc(100vw - 18.125rem);
   padding: 1rem;
   padding: 1rem; /* 16px */
-  height: 100%; /* ⬅️ critical */
   min-height: 0;
   display: flex;
   flex-direction: column;

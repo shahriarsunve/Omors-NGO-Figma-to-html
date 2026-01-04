@@ -63,12 +63,14 @@ body {
 
 .dashboard-main {
   flex: 1;                 // 🔑 allows footer to stick bottom
-  margin: 1.3125rem;
-  padding: 1rem;
+  margin: 1.3125rem 1.3125rem 0 1.3125rem;
+  padding: 1rem 0rem 0rem 1rem;
 
   overflow-y: auto;        // content scrolls, not footer
   background: $bg-panel-alt;
   border-radius: 0.75rem;
+  display: flex;
+
 }
 
 
@@ -77,10 +79,18 @@ body {
   min-height: 100vh;
 }
 
+
+
+
 #sidebar {
   width: 15rem;
   min-height: 70%;
+  margin-top: 1.125rem;
+  margin-left: 0.6rem;
   transition: width 0.3s ease;
+
+  // --computed-height: auto;
+  // height: var(--computed-height);
 
   &.collapsed {
     width: 4rem !important;

@@ -7,18 +7,10 @@ async function loadPartials() {
   document.getElementById("sidebar").innerHTML = sidebar;
   document.getElementById("footer").innerHTML = footer;
 
-  // Initialize sidebar right after loading
   initializeSidebar();
-  
-  // Set active link based on current URL
-  // const sidebarLinks = document.querySelectorAll('.sidebar-item a');
-  // sidebarLinks.forEach(link => {
-  //   if (link.href === window.location.href) {
-  //     link.parentElement.classList.add('active');
-  //   }
-  // });
-
   setActiveSidebarLink()
+
+  document.dispatchEvent(new Event('partialsLoaded'));
 }
 
 function initializeSidebar() {
@@ -98,4 +90,6 @@ function setActiveSidebarLink() {
       console.log('Set active tab for:', linkPath);
     }
   });
+
+
 }
