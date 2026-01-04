@@ -320,3 +320,222 @@
   height: 32px;
   cursor: pointer;
 }
+
+
+
+
+  /* Container alignment */
+.dt-pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+/* Base button style (pagination) */
+.table-wrapper .table-paginate .paginate_button {
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 6px !important;
+  padding: 5px 12px !important;
+  margin-left: 5px !important;
+  color: #64748B !important;
+  background: white !important;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.table-wrapper .table-paginate .paginate_button:hover {
+  background: #F8FAFC !important;
+  color: #1E293B !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* ACTIVE / Selected page */
+.table-wrapper .table-paginate .paginate_button.current {
+  background: #144D29 !important; /* Dark Green from your image */
+  color: white !important;
+  border-color: #144D29 !important;
+}
+
+/* Disabled buttons (dots/arrows) */
+.table-wrapper .table-paginate .paginate_button.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Style for the Ellipsis (...) */
+.table-wrapper .table-paginate .ellipsis {
+  padding: 0 10px;
+  color: #94A3B8;
+}
+
+/* Container for both Info and Pagination */
+.dt-footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+/* Style the "Showing page X of Y" text */
+.table-info {
+  font-size: 14px;
+  color: #64748B; /* Soft slate grey */
+  font-weight: 400;
+}
+
+/* Pagination Wrapper */
+.table-paginate {
+  display: flex;
+  gap: 4px;
+}
+
+/* Individual Buttons (Refining the previous style) */
+
+.table-wrapper .table-paginate .paginate_button {
+  border: 1.5px solid #C0CCC1 !important;
+  border-radius: 8px !important;
+  width: 32px;
+  height: 28px;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF !important;
+  color: #334155 !important;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  box-sizing: border-box;
+}
+
+/* Dark Green Active Button */
+.table-wrapper .table-paginate .paginate_button.current {
+  background: #144D29 !important; /* Your specific Green */
+  color: white !important;
+  border-color: #144D29 !important;
+  box-shadow: none !important;
+}
+
+/* Dots (Ellipsis) style */
+.table-wrapper .table-paginate .ellipsis {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px;
+  color: #94A3B8;
+  font-size: 14px;
+}
+
+/* Adjust prev/next specific look */
+.table-wrapper .table-paginate .prev-btn,
+.table-wrapper .table-paginate .next-btn {
+  width: 36px;
+  height: 28px;
+}
+
+/* Slightly larger active/hover state */
+.table-wrapper .table-paginate .paginate_button:hover:not(.current):not(.disabled) {
+  background: #F8FAFC !important;
+  transform: translateY(-1px);
+}
+
+.table-wrapper .table-paginate .paginate_button.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+
+/* Top Bar Layout */
+.table-controls-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.filter-search-group {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Gap between filter and search */
+}
+
+/* Filter Dropdown (164px per image e03284) */
+.filter-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-item label {
+    font-size: 12px;
+    color: #64748B;
+    white-space: nowrap;
+}
+
+.select-custom {
+    width: 164px;
+    height: 32px;
+    border: 1.5px solid #C0CCC1; /* Color from image 9f5ee6 */
+    border-radius: 8px;
+    padding: 0 10px;
+    font-size: 13px;
+    outline: none;
+}
+
+/* Search Bar (240px per image e032da) */
+.search-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 240px;
+}
+
+.search-input-wrapper i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94A3B8;
+}
+
+#customSearch {
+    width: 100%;
+    height: 32px;
+    padding-left: 32px;
+    border: 1.5px solid #C0CCC1;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+}
+
+/* Action Buttons (Search/Reset) */
+.btn-table-action {
+    height: 32px;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #C0CCC1;
+}
+
+.btn-table-action.search {
+    background: #FFFFFF;
+    color: #1E293B;
+}
+
+.btn-table-action.reset {
+    background: #F1F5F9;
+    color: #64748B;
+}
+
+.btn-table-action:hover {
+    background: #E2E8F0;
+}

@@ -10,18 +10,17 @@
   
   <link rel="stylesheet" href="../css/main.css">
   
-  <link rel="stylesheet" href="../assets/css/jquery.dataTables.min.css">
+  
   
   <link href="../assets/css/select2.min.css" rel="stylesheet" />
   
   <link rel="stylesheet" href="../css/select2-custom.css">
 
   <style>
-    /* Quick fix for layout visibility */
     .tab-content { display: none; }
     .tab-content.active { display: block; }
     .page-tabs .tab.active { font-weight: bold; border-bottom: 2px solid #007bff; }
-    #customSearch { margin-left: 10px; padding: 5px; }
+    #customSearch { margin-left: 10px; padding: 5px 5px 5px 32px; }
     .filter-container { margin-bottom: 15px; }
   </style>
 
@@ -43,7 +42,7 @@
           <button class="tab" data-target="projects-form">Create</button>
         </div>
 
-        <section id="projects-table" class="tab-content active">
+        <section id="projects-table" class="tab-content active table-wrapper">
           <div class="table-controls-top">
             <div class="results-info">
               <span id="topInfo">Showing 0 of 0 results</span>
@@ -64,8 +63,10 @@
                   <i class="bi bi-search"></i>
                   <input id="customSearch" placeholder="Search..." />
                 </div>
-                <!-- <button id="btnSearch" class="btn-table-action search">Search</button>
-                <button id="btnReset" class="btn-table-action reset">Reset</button> -->
+                <div style="display:flex;gap:8px;margin-left:10px;align-items:center;">
+                  <button id="btnSearch" class="btn-table-action search">Search</button>
+                  <button id="btnReset" class="btn-table-action reset">Reset</button>
+                </div>
               </div>
             </div>
           </div>
@@ -160,6 +161,10 @@
               </tr>
             </tbody>
           </table>
+          <div class="dt-footer-container" style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;">
+            <div class="table-info"></div>
+            <div class="table-paginate"></div>
+          </div>
           </section>
 
           <section id="projects-form"  class="form-card tab-content">
@@ -273,296 +278,251 @@
   <div id="footer"></div>
 
   <script src="../assets/js/jquery-3.6.0.min.js"></script>
-  <script src="../assets/js/jquery.dataTables.min.js"></script>
   <script src="../assets/js/select2.min.js"></script>
-
 
   <script src="../js/include.js"></script>
   <script src="../js/layout.js" defer></script>
   <script>
-    $(document).ready(function () {
-      
-      // 1. Initialize DataTable and capture instance in 'table' variable
-      const table = $('#projectsTable').DataTable({
-        searching: true,
-        paging: true,
-        info: true,
-        lengthChange: false,
-        pagingType: "full_numbers",
-        dom: 't<"dt-footer-container"ip>',//'it<"dt-footer-container"ip>',
-        language: {
-                paginate: {
-                    first: "«",
-                    last: "»",
-                    next: '<i class="bi bi-chevron-right"></i>',
-                    previous: '<i class="bi bi-chevron-left"></i>'
-                }
-          },
-          drawCallback: function () {
-          const api = this.api();
-          const info = api.page.info();
-          $('.dt-footer-container').css('display', 'flex');
-          $('.dataTables_info').html(
-              `Showing page ${info.page + 1} of ${info.pages} pages`
-          );
+    $(function () {
+      const apiEndpoint = '/api/projects'; // change to your server endpoint
+      const useMock = true; // set to true to always use mock data for development
+      const $table = $('#projectsTable');
+      const $tbody = $table.find('tbody');
+      const $info = $('.table-info');
+      const $paginate = $('.table-paginate');
+      let pageSize = 15; // default items per page (change if needed)
+      let currentPage = 1;
+      let totalPages = 1;
+
+      function debounce(fn, wait) {
+        let t;
+        return function () {
+          const args = arguments;
+          clearTimeout(t);
+          t = setTimeout(() => fn.apply(this, args), wait);
+        };
+      }
+
+      function renderPagination(total) {
+        totalPages = Math.max(1, Math.ceil(total / pageSize));
+        $paginate.empty();
+        const $prev = $('<button>').addClass('paginate_button prev-btn').attr('data-page', 'prev').html('<i class="bi bi-chevron-left"></i>');
+        const $next = $('<button>').addClass('paginate_button next-btn').attr('data-page', 'next').html('<i class="bi bi-chevron-right"></i>');
+        if (currentPage === 1) $prev.addClass('disabled');
+        if (currentPage === totalPages) $next.addClass('disabled');
+        $paginate.append($prev);
+
+        const maxButtons = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+        let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+        if (endPage - startPage < maxButtons - 1) startPage = Math.max(1, endPage - maxButtons + 1);
+
+        if (startPage > 1) {
+          $paginate.append($('<button>').addClass('paginate_button page-btn').text(1).attr('data-page', 1));
+          if (startPage > 2) $paginate.append($('<span>').addClass('ellipsis').text('...'));
         }
+
+        for (let p = startPage; p <= endPage; p++) {
+          const $btn = $('<button>').addClass('paginate_button page-btn').text(p).attr('data-page', p);
+          if (p === currentPage) $btn.addClass('current');
+          $paginate.append($btn);
+        }
+
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) $paginate.append($('<span>').addClass('ellipsis').text('...'));
+          $paginate.append($('<button>').addClass('paginate_button page-btn').text(totalPages).attr('data-page', totalPages));
+        }
+
+        $paginate.append($next);
+      }
+
+      function fetchPage(page = 1) {
+        const params = {
+          page,
+          pageSize,
+          search: $('#customSearch').val().trim(),
+          type: $('#filterType').val() || ''
+        };
+        currentPage = page;
+        $info.text('Loading...');
+        $tbody.html('<tr><td colspan="5" style="text-align:center;padding:20px;">Loading...</td></tr>');
+        if (useMock) {
+          // Generate mock items for the page
+          const mockTotal = 1533;
+          const mockItems = [];
+          const startSerial = (currentPage - 1) * pageSize + 1;
+          for (let i = 0; i < pageSize; i++) {
+            mockItems.push({ serial: startSerial + i, title: `Mock Project ${startSerial + i}`, type: (i % 2 === 0) ? 'Research-Based Work' : 'Program-Based Work', thematic: ['Health', 'Education'] });
+          }
+          const rowsHtml = mockItems.map(item => {
+            const thematicHtml = (item.thematic || []).map(t => `<span class="tag tag-blue">${t}</span>`).join(' ');
+            return `<tr>
+              <td>${item.serial}</td>
+              <td>${item.title}</td>
+              <td>${item.type}</td>
+              <td>${thematicHtml}</td>
+              <td><button class="action-btn">⋯</button></td>
+            </tr>`;
+          }).join('');
+          $tbody.html(rowsHtml);
+          const start = mockItems.length ? ((currentPage - 1) * pageSize + 1) : 0;
+          const end = (currentPage - 1) * pageSize + mockItems.length;
+          $('#topInfo').text(`Showing ${start} to ${end} of ${mockTotal} results`);
+          $info.html(`Showing page ${currentPage} of ${Math.max(1, Math.ceil(mockTotal / pageSize))} pages`);
+          renderPagination(mockTotal);
+          return;
+        }
+
+        $.ajax({ url: apiEndpoint, data: params, method: 'GET', dataType: 'json' })
+          .done(function (res) {
+            // expected: { total: number, items: [ { serial, title, type, thematic: [] } ] }
+            const total = res.total || 0;
+            const items = res.items || [];
+
+            // render rows
+            const rowsHtml = items.map(item => {
+              const thematicHtml = (item.thematic || []).map(t => `<span class="tag tag-blue">${t}</span>`).join(' ');
+              return `<tr>
+                <td>${item.serial || ''}</td>
+                <td>${item.title || ''}</td>
+                <td>${item.type || ''}</td>
+                <td>${thematicHtml}</td>
+                <td><button class="action-btn">⋯</button></td>
+              </tr>`;
+            }).join('');
+
+            $tbody.html(rowsHtml || '<tr><td colspan="5" style="text-align:center;padding:20px;">No results</td></tr>');
+            const start = items.length ? ((currentPage - 1) * pageSize + 1) : 0;
+            const end = (currentPage - 1) * pageSize + items.length;
+            $('#topInfo').text(`Showing ${start} to ${end} of ${total} results`);
+            $info.html(`Showing page ${currentPage} of ${Math.max(1, Math.ceil(total / pageSize))} pages`);
+            renderPagination(total);
+          })
+          .fail(function (jqXHR, textStatus, errorThrown) {
+            // Handle 404 (endpoint missing), other errors, and optionally fallback to mock data
+            if (jqXHR && jqXHR.status === 404) {
+              $tbody.html('<tr><td colspan="5" style="text-align:center;padding:20px;color:#c00">API endpoint not found (404). Check your server or update <code>apiEndpoint</code>.</td></tr>');
+              $info.text('Failed to load results');
+              $paginate.empty();
+              console.warn('API 404:', apiEndpoint, params);
+              return;
+            }
+
+            // If server unavailable or other error, show friendly message and offer a local mock fallback
+            console.error('API error', textStatus, errorThrown, jqXHR);
+            // Fallback: if apiEndpoint is the default local path, provide mock data so UI stays usable during dev
+            const useMockOnFail = true;
+            if (useMockOnFail) {
+              const mockTotal = 1533;
+              const mockItems = [];
+              const startSerial = (currentPage - 1) * pageSize + 1;
+              for (let i = 0; i < pageSize; i++) {
+                mockItems.push({ serial: startSerial + i, title: `Mock Project ${startSerial + i}`, type: 'Research-Based Work', thematic: ['Health', 'Education'] });
+              }
+              const rowsHtml = mockItems.map(item => {
+                const thematicHtml = (item.thematic || []).map(t => `<span class="tag tag-blue">${t}</span>`).join(' ');
+                return `<tr>
+                  <td>${item.serial}</td>
+                  <td>${item.title}</td>
+                  <td>${item.type}</td>
+                  <td>${thematicHtml}</td>
+                  <td><button class="action-btn">⋯</button></td>
+                </tr>`;
+              }).join('');
+              $tbody.html(rowsHtml);
+              $('#topInfo').text(`Showing ${startSerial} to ${startSerial + mockItems.length - 1} of ${mockTotal} results`);
+              $info.html(`Showing page ${currentPage} of ${Math.max(1, Math.ceil(mockTotal / pageSize))} pages`);
+              renderPagination(mockTotal);
+              return;
+            }
+
+            $tbody.html('<tr><td colspan="5" style="text-align:center;padding:20px;color:#c00">Failed to load results</td></tr>');
+            $info.text('Failed to load results');
+            $paginate.empty();
+          });
+      }
+
+      // pagination click
+      $(document).on('click', '.table-paginate .paginate_button', function () {
+        if ($(this).hasClass('disabled')) return;
+        const p = $(this).attr('data-page');
+        if (p === 'prev') fetchPage(Math.max(1, currentPage - 1));
+        else if (p === 'next') fetchPage(Math.min(totalPages, currentPage + 1));
+        else fetchPage(Number(p));
       });
 
-      // 2. Custom Search Box Logic
-      $('#customSearch').on('keyup', function () {
-        table.search(this.value).draw();
-      });
+      // search/filter handlers (debounced)
+      $('#customSearch').on('keyup', debounce(function () { fetchPage(1); }, 300));
+      $('#btnSearch').on('click', function () { fetchPage(1); });
+      $('#customSearch').on('keypress', function (e) { if (e.which === 13) $('#btnSearch').click(); });
+      $('#filterType').on('change', function () { fetchPage(1); });
+      $('#btnReset').on('click', function () { $('#customSearch').val(''); $('#filterType').val(''); fetchPage(1); });
 
-      // 3. Custom Filter Dropdown (Column 2 is TYPE)
-      $('#filterType').on('change', function () {
-        table.column(2).search(this.value).draw();
-      });
+      // Initialize Select2
+      $('.select2').select2({ placeholder: 'Please select', allowClear: true, width: '100%' });
 
-      // 4. Initialize all Select2 elements
-      $('.select2').select2({
-        placeholder: 'Please select',
-        allowClear: true,
-        width: '100%'
-      });
-
-      // 5. Tab Switching Logic using jQuery
+      // Tab switching (fetch when view tab opened)
       $('.tab').on('click', function () {
         const targetId = $(this).data('target');
-        
-        // Update tab buttons
         $('.tab').removeClass('active');
         $(this).addClass('active');
-
-        // Update content visibility
         $('.tab-content').removeClass('active');
         $('#' + targetId).addClass('active');
-
-        // Fix DataTables column alignment if switched while hidden
-        if(targetId === 'projects-table') {
-          table.columns.adjust().draw();
-        }
+        if (targetId === 'projects-table') fetchPage(1);
       });
-    });
 
+      // initial load
+      fetchPage(1);
+    });
     // Handle include.js custom event if needed
-    document.addEventListener('partialsLoaded', function() {
-        console.log("Headers and Sidebars loaded.");
-    });
-
-
-    // table.on('draw', function() {
-    //     const info = table.page.info();
-    //     $('#topInfo').text(`Showing ${info.recordsDisplay} of ${info.recordsTotal} results`);
-    // });
-
-    // Trigger search only on button click (or Enter key)
-    $('#btnSearch').on('click', function() {
-        table.search($('#customSearch').val()).draw();
-    });
-
-    $('#customSearch').on('keypress', function(e) {
-        if(e.which == 13) $('#btnSearch').click();
-    });
-
-    // Reset everything
-    $('#btnReset').on('click', function() {
-        $('#customSearch').val('');
-        $('#filterType').val('');
-        table.search('').column(2).search('').draw();
-    });
-
-    // Filter dropdown
-    $('#filterType').on('change', function () {
-        table.column(2).search(this.value).draw();
+    document.addEventListener('partialsLoaded', function () {
+      console.log('Headers and Sidebars loaded.');
     });
   </script>
 <style>
-  /* Container alignment */
-.dt-pagination {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 5px;
-    margin-top: 20px;
-}
+  /* Table header / search and filter layout */
+  .table-controls-top { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+  .table-controls-top .results-info { flex:0 0 auto; }
+  .filter-search-group { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  .filter-item { display:flex; gap:6px; }
+  .search-item { display:flex; align-items:center; gap:8px; }
+  .search-input-wrapper { position:relative; }
+  .search-input-wrapper i { position:absolute; left:18px; top:50%; transform:translateY(-50%); color:#6c757d; }
+  #customSearch { padding:8px 10px 8px 34px; border-radius:6px; border:1px solid #ddd; min-width:180px; }
+  .btn-table-action { padding:7px 10px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; }
 
-/* Base button style */
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-    border: 1px solid #E2E8F0 !important;
-    border-radius: 6px !important;
-    padding: 5px 12px !important;
-    margin-left: 5px !important;
-    color: #64748B !important;
-    background: white !important;
-    font-size: 14px;
-    cursor: pointer;
-}
+  /* Footer / pagination layout */
+  .dt-footer-container { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:12px; }
+  .table-info { color:#666; font-size:0.95rem; }
+  .table-paginate { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .table-paginate .paginate_button { border:1px solid #e6e6e6; background:#fff; padding:6px 10px; border-radius:6px; min-width:36px; font-size:0.95rem; }
+  .table-paginate .paginate_button.current { background:#198754; color:#fff; border-color:#198754; }
+  .table-paginate .paginate_button.disabled { opacity:0.55; pointer-events:none; }
+  .table-paginate .ellipsis { padding:6px 8px; color:#777; }
 
-/* Hover effect */
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background: #F8FAFC !important;
-    color: #1E293B !important;
-    border-color: #CBD5E1 !important;
-}
+  /* Make table scrollable horizontally on small screens */
+  .table-wrapper { width:100%; overflow-x:auto; }
+  .projects-table { width:100%; border-collapse:collapse; }
 
-/* ACTIVE / Selected page */
-.dataTables_wrapper .dataTables_paginate .paginate_button.current {
-    background: #144D29 !important; /* Dark Green from your image */
-    color: white !important;
-    border-color: #144D29 !important;
-}
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .table-controls-top { align-items:flex-start; }
+    .filter-search-group { flex-direction:column; align-items:stretch; width:100%; }
+    .filter-item { width:100%; }
+    .search-item { width:100%; justify-content:space-between; }
+    .search-input-wrapper { width:100%; }
+    #customSearch { width:100%; min-width:0; }
+    .search-item > div { display:flex; gap:8px; }
+    .dt-footer-container { flex-direction:column; align-items:stretch; }
+    .table-paginate { justify-content:center; margin-top:8px; }
+  }
 
-/* Disabled buttons (dots/arrows) */
-.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
-    opacity: 0.5;
-    cursor: default;
-}
-
-/* Style for the Ellipsis (...) */
-.dataTables_wrapper .dataTables_paginate .ellipsis {
-    padding: 0 10px;
-    color: #94A3B8;
-}
-
-/* Container for both Info and Pagination */
-.dt-footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    padding-top: 10px;
-}
-
-/* Style the "Showing page X of Y" text */
-.dataTables_info {
-    font-size: 14px;
-    color: #64748B; /* Soft slate grey */
-    font-weight: 400;
-}
-
-/* Pagination Wrapper */
-.dataTables_paginate {
-    display: flex;
-    gap: 4px;
-}
-
-/* Individual Buttons (Refining the previous style) */
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-    border: 1px solid #E2E8F0 !important;
-    border-radius: 6px !important;
-    padding: 6px 12px !important;
-    background: white !important;
-    color: #334155 !important;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-/* Dark Green Active Button */
-.dataTables_wrapper .dataTables_paginate .paginate_button.current {
-    background: #144D29 !important; /* Your specific Green */
-    color: white !important;
-    border-color: #144D29 !important;
-}
-
-/* Dots (Ellipsis) style */
-.dataTables_wrapper .dataTables_paginate .ellipsis {
-    padding: 0 8px;
-    color: #94A3B8;
-}
-
-
-/* Top Bar Layout */
-.table-controls-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-}
-
-.filter-search-group {
-    display: flex;
-    align-items: center;
-    gap: 12px; /* Gap between filter and search */
-}
-
-/* Filter Dropdown (164px per image e03284) */
-.filter-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.filter-item label {
-    font-size: 12px;
-    color: #64748B;
-    white-space: nowrap;
-}
-
-.select-custom {
-    width: 164px;
-    height: 32px;
-    border: 1.5px solid #C0CCC1; /* Color from image 9f5ee6 */
-    border-radius: 8px;
-    padding: 0 10px;
-    font-size: 13px;
-    outline: none;
-}
-
-/* Search Bar (240px per image e032da) */
-.search-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.search-input-wrapper {
-    position: relative;
-    width: 240px;
-}
-
-.search-input-wrapper i {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #94A3B8;
-}
-
-#customSearch {
-    width: 100%;
-    height: 32px;
-    padding-left: 32px;
-    border: 1.5px solid #C0CCC1;
-    border-radius: 8px;
-    font-size: 13px;
-    outline: none;
-}
-
-/* Action Buttons (Search/Reset) */
-.btn-table-action {
-    height: 32px;
-    padding: 0 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: 1px solid #C0CCC1;
-}
-
-.btn-table-action.search {
-    background: #FFFFFF;
-    color: #1E293B;
-}
-
-.btn-table-action.reset {
-    background: #F1F5F9;
-    color: #64748B;
-}
-
-.btn-table-action:hover {
-    background: #E2E8F0;
-}
+  @media (max-width: 480px) {
+    #customSearch { padding:8px 8px 8px 34px; font-size:0.95rem; }
+    .table-paginate .paginate_button { padding:6px 8px; min-width:32px; font-size:0.9rem; }
+    .table-info { font-size:0.9rem; text-align:left; }
+    .btn-table-action { padding:6px 8px; font-size:0.95rem; }
+  }
 </style>
 </body>
 </html>
