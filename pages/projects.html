@@ -16,13 +16,7 @@
   
   <link rel="stylesheet" href="../css/select2-custom.css">
 
-  <style>
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .page-tabs .tab.active { font-weight: bold; border-bottom: 2px solid #007bff; }
-    #customSearch { margin-left: 10px; padding: 5px 5px 5px 32px; }
-    .filter-container { margin-bottom: 15px; }
-  </style>
+  <!-- moved inline styles to scss/layout/_table.scss -->
 
 </head>
 
@@ -43,129 +37,80 @@
         </div>
 
         <section id="projects-table" class="tab-content active table-wrapper">
-          <div class="table-controls-top">
-            <div class="results-info">
-              <span id="topInfo">Showing 0 of 0 results</span>
-            </div>
-            
-            <div class="filter-search-group">
+          <section class="content-card">
+            <div class="card-header">
+              <h3>Projects</h3>
+
+              <div class="card-actions">
+                <div class="search-input">
+    <i class="bi bi-search"></i>
+    <input id="customSearch" type="text" placeholder="Search..." />
+  </div>
+
               <div class="filter-item">
-                <label>Filter By Type:</label>
-                <select id="filterType" class="select-custom">
-                  <option value="">All</option>
-                  <option value="Research-Based Work">Research-Based Work</option>
-                  <option value="Program-Based Work">Program-Based Work</option>
-                </select>
-              </div>
+    <select id="filterType" class="select-custom">
+      <option value="">All</option>
+      <option value="Research-Based Work">Research-Based Work</option>
+      <option value="Program-Based Work">Program-Based Work</option>
+    </select>
+  </div>
 
-              <div class="search-item">
-                <div class="search-input-wrapper">
-                  <i class="bi bi-search"></i>
-                  <input id="customSearch" placeholder="Search..." />
-                </div>
-                <div style="display:flex;gap:8px;margin-left:10px;align-items:center;">
-                  <button id="btnSearch" class="btn-table-action search">Search</button>
-                  <button id="btnReset" class="btn-table-action reset">Reset</button>
-                </div>
+  <button id="btnSearch" class="btn-outline">
+    <i class="bi bi-sliders"></i>
+    Search
+  </button>
+
+  <button id="btnReset" class="btn-primary">
+    Reset
+  </button>
               </div>
             </div>
-          </div>
 
-          <table id="projectsTable" class="projects-table" style="width:100%">
-            <thead>
-              <tr>
-                <th>SERIAL</th>
-                <th>TITLE</th>
-                <th>TYPE</th>
-                <th>THEMATIC FOCUS</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>999-National Emergency Service (NHH)</td>
-                <td>Research-Based Work</td>
-                <td><span class="tag tag-blue">Human Rights</span></td>
-                <td><button class="action-btn">⋯</button></td>
-              </tr>
-                            <tr>
-                <td>1</td>
-                <td>999-National Emergency Service (NHH)</td>
-                <td>Research-Based Work</td>
-                <td><span class="tag tag-blue">Human Rights</span></td>
-                <td><button class="action-btn">⋯</button></td>
-              </tr>
-                            <tr>
-                <td>1</td>
-                <td>999-National Emergency Service (NHH)</td>
-                <td>Research-Based Work</td>
-                <td><span class="tag tag-blue">Human Rights</span></td>
-                <td><button class="action-btn">⋯</button></td>
-              </tr>
-                            <tr>
-                <td>1</td>
-                <td>999-National Emergency Service (NHH)</td>
-                <td>Research-Based Work</td>
-                <td><span class="tag tag-blue">Human Rights</span></td>
-                <td><button class="action-btn">⋯</button></td>
-              </tr>
-                            <tr>
-                <td>1</td>
-                <td>999-National Emergency Service (NHH)</td>
-                <td>Research-Based Work</td>
-                <td><span class="tag tag-blue">Human Rights</span></td>
-                <td><button class="action-btn">⋯</button></td>
-              </tr>
-                            <tr>
-                <td>1</td>
-                <td>999-National Emergency Service (NHH)</td>
-                <td>Research-Based Work</td>
-                <td><span class="tag tag-blue">Human Rights</span></td>
-                <td><button class="action-btn">⋯</button></td>
-              </tr>
-                            <tr>
-                <td>1</td>
-                <td>999-National Emergency Service (NHH)</td>
-                <td>Research-Based Work</td>
-                <td><span class="tag tag-blue">Human Rights</span></td>
-                <td><button class="action-btn">⋯</button></td>
-              </tr>
-                            <tr>
-                <td>1</td>
-                <td>999-National Emergency Service (NHH)</td>
-                <td>Research-Based Work</td>
-                <td><span class="tag tag-blue">Human Rights</span></td>
-                <td><button class="action-btn">⋯</button></td>
-              </tr>
+            <table id="projectsTable" class="data-table">
+              <thead>
+                <tr>
+                  <th>SERIAL</th>
+                  <th>TITLE</th>
+                  <th>TYPE</th>
+                  <th>THEMATIC FOCUS</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody>
               <tr>
                 <td>1</td>
                 <td>999-National Emergency Service (NHH)</td>
                 <td>Research-Based Work</td>
                 <td><span class="tag tag-blue">Human Rights</span></td>
-                <td><button class="action-btn">⋯</button></td>
+                <td><button class="btn-sm">Details</button></td>
               </tr>
                             <tr>
-                <td>1</td>
-                <td>999-National Emergency Service (NHH)</td>
-                <td>Research-Based Work</td>
-                <td><span class="tag tag-blue">Human Rights</span></td>
-                <td><button class="action-btn">⋯</button></td>
+                <td>2</td>
+                <td>Project Alpha</td>
+                <td>Program-Based Work</td>
+                <td><span class="tag tag-blue">Education</span></td>
+                <td><button class="btn-sm">Details</button></td>
               </tr>
                             <tr>
-                <td>1</td>
-                <td>999-National Emergency Service (NHH)</td>
+                <td>3</td>
+                <td>Project Beta</td>
                 <td>Research-Based Work</td>
                 <td><span class="tag tag-pink">Health</span></td>
-                <td><button class="action-btn">⋯</button></td>
+                <td><button class="btn-sm">Details</button></td>
               </tr>
-            </tbody>
-          </table>
-          <div class="dt-footer-container" style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;">
+              </tbody>
+            </table>
+
+                <div class="table-footer">
+    Total Projects 1533
+  </div>
+
+    <div class="dt-footer-container">
             <div class="table-info"></div>
             <div class="table-paginate"></div>
           </div>
-          </section>
+    </section>
+    </section>
 
           <section id="projects-form"  class="form-card tab-content">
 
@@ -479,50 +424,5 @@
       console.log('Headers and Sidebars loaded.');
     });
   </script>
-<style>
-  /* Table header / search and filter layout */
-  .table-controls-top { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
-  .table-controls-top .results-info { flex:0 0 auto; }
-  .filter-search-group { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-  .filter-item { display:flex; gap:6px; }
-  .search-item { display:flex; align-items:center; gap:8px; }
-  .search-input-wrapper { position:relative; }
-  .search-input-wrapper i { position:absolute; left:18px; top:50%; transform:translateY(-50%); color:#6c757d; }
-  #customSearch { padding:8px 10px 8px 34px; border-radius:6px; border:1px solid #ddd; min-width:180px; }
-  .btn-table-action { padding:7px 10px; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; }
-
-  /* Footer / pagination layout */
-  .dt-footer-container { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:12px; }
-  .table-info { color:#666; font-size:0.95rem; }
-  .table-paginate { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-  .table-paginate .paginate_button { border:1px solid #e6e6e6; background:#fff; padding:6px 10px; border-radius:6px; min-width:36px; font-size:0.95rem; }
-  .table-paginate .paginate_button.current { background:#198754; color:#fff; border-color:#198754; }
-  .table-paginate .paginate_button.disabled { opacity:0.55; pointer-events:none; }
-  .table-paginate .ellipsis { padding:6px 8px; color:#777; }
-
-  /* Make table scrollable horizontally on small screens */
-  .table-wrapper { width:100%; overflow-x:auto; }
-  .projects-table { width:100%; border-collapse:collapse; }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .table-controls-top { align-items:flex-start; }
-    .filter-search-group { flex-direction:column; align-items:stretch; width:100%; }
-    .filter-item { width:100%; }
-    .search-item { width:100%; justify-content:space-between; }
-    .search-input-wrapper { width:100%; }
-    #customSearch { width:100%; min-width:0; }
-    .search-item > div { display:flex; gap:8px; }
-    .dt-footer-container { flex-direction:column; align-items:stretch; }
-    .table-paginate { justify-content:center; margin-top:8px; }
-  }
-
-  @media (max-width: 480px) {
-    #customSearch { padding:8px 8px 8px 34px; font-size:0.95rem; }
-    .table-paginate .paginate_button { padding:6px 8px; min-width:32px; font-size:0.9rem; }
-    .table-info { font-size:0.9rem; text-align:left; }
-    .btn-table-action { padding:6px 8px; font-size:0.95rem; }
-  }
-</style>
 </body>
 </html>

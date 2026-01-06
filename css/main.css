@@ -13003,6 +13003,41 @@ body {
   background: #E2E8F0;
 }
 
+/* Tab content visibility (moved from inline styles in projects.html) */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Page tabs */
+.page-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.page-tabs .tab {
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #0d1c0b;
+}
+
+.page-tabs .tab.active {
+  font-weight: 700;
+  border-bottom: 2px solid #3c6841;
+}
+
+/* small helper */
+.filter-container {
+  margin-bottom: 15px;
+}
+
 .main-content-container {
   background: #f1f9f0;
   border: 0.0375rem solid #bfbfbf; /* 0.6px */

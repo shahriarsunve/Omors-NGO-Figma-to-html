@@ -539,3 +539,29 @@
 .btn-table-action:hover {
     background: #E2E8F0;
 }
+
+/* Tab content visibility (moved from inline styles in projects.html) */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Page tabs */
+.page-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.page-tabs .tab {
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: $text;
+}
+.page-tabs .tab.active {
+  font-weight: 700;
+  border-bottom: 2px solid $brand;
+}
+
+/* small helper */
+.filter-container { margin-bottom: 15px; }
