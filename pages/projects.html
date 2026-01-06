@@ -82,21 +82,45 @@
                 <td>999-National Emergency Service (NHH)</td>
                 <td>Research-Based Work</td>
                 <td><span class="tag tag-blue">Human Rights</span></td>
-                <td><button class="btn-sm">Details</button></td>
+                <td>
+                  <div class="dropdown">
+                    <button class="dropdown-toggle" aria-expanded="false">⋯</button>
+                    <div class="dropdown-menu">
+                      <button class="dropdown-item dropdown-view">View</button>
+                      <button class="dropdown-item dropdown-edit">Edit</button>
+                    </div>
+                  </div>
+                </td>
               </tr>
                             <tr>
                 <td>2</td>
                 <td>Project Alpha</td>
                 <td>Program-Based Work</td>
                 <td><span class="tag tag-blue">Education</span></td>
-                <td><button class="btn-sm">Details</button></td>
+                <td>
+                  <div class="dropdown">
+                    <button class="dropdown-toggle" aria-expanded="false">⋯</button>
+                    <div class="dropdown-menu">
+                      <button class="dropdown-item dropdown-view">View</button>
+                      <button class="dropdown-item dropdown-edit">Edit</button>
+                    </div>
+                  </div>
+                </td>
               </tr>
                             <tr>
                 <td>3</td>
                 <td>Project Beta</td>
                 <td>Research-Based Work</td>
                 <td><span class="tag tag-pink">Health</span></td>
-                <td><button class="btn-sm">Details</button></td>
+                <td>
+                  <div class="dropdown">
+                    <button class="dropdown-toggle" aria-expanded="false">⋯</button>
+                    <div class="dropdown-menu">
+                      <button class="dropdown-item dropdown-view">View</button>
+                      <button class="dropdown-item dropdown-edit">Edit</button>
+                    </div>
+                  </div>
+                </td>
               </tr>
               </tbody>
             </table>
@@ -291,7 +315,7 @@
         currentPage = page;
         $info.text('Loading...');
         $tbody.html('<tr><td colspan="5" style="text-align:center;padding:20px;">Loading...</td></tr>');
-        if (useMock) {
+            if (useMock) {
           // Generate mock items for the page
           const mockTotal = 1533;
           const mockItems = [];
@@ -299,14 +323,22 @@
           for (let i = 0; i < pageSize; i++) {
             mockItems.push({ serial: startSerial + i, title: `Mock Project ${startSerial + i}`, type: (i % 2 === 0) ? 'Research-Based Work' : 'Program-Based Work', thematic: ['Health', 'Education'] });
           }
-          const rowsHtml = mockItems.map(item => {
+            const rowsHtml = mockItems.map(item => {
             const thematicHtml = (item.thematic || []).map(t => `<span class="tag tag-blue">${t}</span>`).join(' ');
             return `<tr>
               <td>${item.serial}</td>
               <td>${item.title}</td>
               <td>${item.type}</td>
               <td>${thematicHtml}</td>
-              <td><button class="action-btn">⋯</button></td>
+              <td>
+                <div class="dropdown">
+                  <span class="dropdown-trigger">⋯</span>
+                  <div class="dropdown-menu">
+                    <button class="dropdown-item dropdown-view">View</button>
+                    <button class="dropdown-item dropdown-edit">Edit</button>
+                  </div>
+                </div>
+              </td>
             </tr>`;
           }).join('');
           $tbody.html(rowsHtml);
@@ -325,14 +357,22 @@
             const items = res.items || [];
 
             // render rows
-            const rowsHtml = items.map(item => {
+              const rowsHtml = items.map(item => {
               const thematicHtml = (item.thematic || []).map(t => `<span class="tag tag-blue">${t}</span>`).join(' ');
               return `<tr>
                 <td>${item.serial || ''}</td>
                 <td>${item.title || ''}</td>
                 <td>${item.type || ''}</td>
                 <td>${thematicHtml}</td>
-                <td><button class="action-btn">⋯</button></td>
+                <td>
+                  <div class="dropdown">
+                    <span class="dropdown-trigger">⋯</span>
+                    <div class="dropdown-menu">
+                      <button class="dropdown-item dropdown-view">View</button>
+                      <button class="dropdown-item dropdown-edit">Edit</button>
+                    </div>
+                  </div>
+                </td>
               </tr>`;
             }).join('');
 
@@ -371,7 +411,15 @@
                   <td>${item.title}</td>
                   <td>${item.type}</td>
                   <td>${thematicHtml}</td>
-                  <td><button class="action-btn">⋯</button></td>
+                  <td>
+                    <div class="dropdown">
+                      <span class="dropdown-trigger">⋯</span>
+                      <div class="dropdown-menu">
+                        <button class="dropdown-item dropdown-view">View</button>
+                        <button class="dropdown-item dropdown-edit">Edit</button>
+                      </div>
+                    </div>
+                  </td>
                 </tr>`;
               }).join('');
               $tbody.html(rowsHtml);
@@ -418,6 +466,35 @@
 
       // initial load
       fetchPage(1);
+
+      // Dropdown toggle (per-row) - click the three-dot icon to toggle menu
+      $(document).on('click', '.dropdown-trigger', function (e) {
+        e.stopPropagation();
+        const $dropdown = $(this).closest('.dropdown');
+        // close other open dropdowns
+        $('.dropdown').not($dropdown).removeClass('show');
+        $dropdown.toggleClass('show');
+      });
+
+      // Click outside closes dropdowns
+      $(document).on('click', function () {
+        $('.dropdown').removeClass('show');
+      });
+
+      // Dropdown action handlers (use row context to get serial)
+      $(document).on('click', '.dropdown-item.dropdown-view', function (e) {
+        e.stopPropagation();
+        const $tr = $(this).closest('tr');
+        const serial = $tr.find('td').eq(0).text().trim();
+        window.location.href = `./project-view.html?id=${encodeURIComponent(serial)}`;
+      });
+
+      $(document).on('click', '.dropdown-item.dropdown-edit', function (e) {
+        e.stopPropagation();
+        const $tr = $(this).closest('tr');
+        const serial = $tr.find('td').eq(0).text().trim();
+        window.location.href = `./project-edit.html?id=${encodeURIComponent(serial)}`;
+      });
     });
     // Handle include.js custom event if needed
     document.addEventListener('partialsLoaded', function () {

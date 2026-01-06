@@ -540,6 +540,144 @@
     background: #E2E8F0;
 }
 
+/* Modal for row actions */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 15, 10, 0.45);
+  z-index: 1200;
+}
+.modal-backdrop.open { display: flex; }
+.modal-backdrop .modal {
+  background: $white;
+  border-radius: 12px;
+  padding: 18px;
+  width: 320px;
+  max-width: calc(100% - 32px);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.2);
+  position: relative;
+  text-align: center;
+}
+.modal-backdrop .modal .modal-close {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+.modal-backdrop .modal .modal-title {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.modal-backdrop .modal .modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.modal-backdrop .modal .modal-actions .btn-outline,
+.modal-backdrop .modal .modal-actions .btn-primary {
+  min-width: 100px;
+}
+
+/* Action dropdown (replaces modal for row actions) */
+.action-dropdown {
+  position: absolute;
+  display: none;
+  z-index: 200000;
+}
+.action-dropdown .dropdown-card {
+  background: $white;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(2,6,23,0.18);
+  padding: 10px 12px;
+  min-width: 180px;
+}
+.action-dropdown .dropdown-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: $text;
+}
+.action-dropdown .dropdown-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.action-dropdown .dropdown-actions .btn-outline,
+.action-dropdown .dropdown-actions .btn-primary {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+/* Simple dropdown (Bootstrap-like) */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-toggle {
+  background: transparent;
+  border: 1px solid transparent;
+  width: 36px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.dropdown-toggle:focus { outline: none; box-shadow: 0 0 0 3px rgba(20,77,41,0.12); }
+.dropdown-trigger {
+  cursor: pointer;
+  font-size: 1rem;
+  color: $text;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid $border-color;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+.dropdown-trigger:hover {
+  border-color: $border-strong;
+  background-color: rgba($brand, 0.05);
+}
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 160px;
+  background: $white;
+  border: 1px solid $border-strong;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.12);
+  padding: 6px 0;
+  display: none;
+  z-index: 200000;
+}
+.dropdown.show .dropdown-menu { display: block; }
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: $text;
+}
+.dropdown-item:hover { background: #f1f5f9; }
+
 /* Tab content visibility (moved from inline styles in projects.html) */
 .tab-content { display: none; }
 .tab-content.active { display: block; }
