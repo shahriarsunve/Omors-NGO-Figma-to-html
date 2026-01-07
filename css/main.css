@@ -13481,5 +13481,68 @@ body {
     grid-template-columns: 1fr;
   }
 }
+/* Modal width */
+.advance-search-modal .modal-dialog {
+  max-width: 560px;
+}
+
+/* Modal content */
+.advance-search-modal .modal-content {
+  border-radius: 12px;
+  background: #f5faef;
+  border: none;
+}
+
+/* Header gradient */
+.advance-search-modal .modal-header {
+  border-radius: 12px 12px 0 0;
+  padding: 16px;
+  color: #fff;
+}
+
+.gradient-green {
+  background: linear-gradient(90deg, #4c8352, #70c278);
+}
+
+/* Close button */
+.advance-search-modal .close {
+  color: #fff;
+  opacity: 1;
+}
+
+/* Form spacing */
+.advance-search-form .form-group {
+  margin-bottom: 16px;
+}
+
+.advance-search-form label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+/* Inputs */
+.advance-search-form .form-control {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  font-size: 14px;
+}
+
+/* Search button */
+.btn-search {
+  width: 100%;
+  height: 40px;
+  margin-top: 12px;
+  border-radius: 8px;
+  color: #fff;
+  border: none;
+  background: linear-gradient(90deg, #3c6841, #2d5030);
+}
+
+/* Remove default bootstrap footer gap */
+.advance-search-modal .modal-body {
+  padding: 20px 24px 24px;
+}
 
 /*# sourceMappingURL=main.css.map */

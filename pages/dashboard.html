@@ -10,6 +10,7 @@
 
   <!-- Main CSS -->
   <link rel="stylesheet" href="../css/main.css">
+
 </head>
 
 <body class="dashboard-page">
@@ -69,7 +70,7 @@
     <input type="text" placeholder="Search..." />
   </div>
 
-  <button class="btn-outline">
+  <button class="btn-outline"  data-toggle="modal" data-target="#exampleModal">
     <i class="bi bi-sliders"></i>
     Advance Search
   </button>
@@ -239,5 +240,67 @@
 
   <script src="../js/include.js"></script>
   <script src="../js/layout.js" defer></script>
+  <script src="../assets/js/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Advance Search Modal -->
+<div class="modal fade advance-search-modal" id="exampleModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Header -->
+      <div class="modal-header gradient-green">
+        <h5 class="modal-title">Advance Search</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button> -->
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <form class="advance-search-form">
+
+          <div class="form-group">
+            <label>Organization Name</label>
+            <input type="text" class="form-control" placeholder="Type the Name of Organization">
+          </div>
+
+          <div class="form-group">
+            <label>Organization Type</label>
+            <select class="form-control">
+              <option>Select Organization Type</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Thematic Focus</label>
+            <select class="form-control">
+              <option>Select Thematic Focus</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Search</label>
+            <input type="text" class="form-control" placeholder="Type here">
+          </div>
+
+          <button type="submit" class="btn btn-search">Search</button>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+  $('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) 
+  var recipient = button.data('whatever')
+    var modal = $(this)
+  modal.find('.modal-body input').val(recipient)
+})
+</script>
 </body>
 </html>

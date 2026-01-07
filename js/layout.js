@@ -6,7 +6,6 @@ function updateSidebarHeight() {
 
   const sidebarTop = sidebar.getBoundingClientRect().top + window.scrollY;
   const footerTop = footer.getBoundingClientRect().top + window.scrollY;
-debugger
   const height = Math.max(0, footerTop - sidebarTop - 16);
 
     const sidebarcls = document.querySelector('.sidebar');
