@@ -13309,6 +13309,68 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+/* Address + Map layout for project form */
+.address-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.address-left {
+  flex: 1;
+}
+
+.address-right {
+  width: 21.25rem; /* 340px */
+}
+
+.address-left .address-row-top,
+.address-left .address-row-bottom {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.address-row-top {
+  margin-bottom: 5.25rem !important;
+}
+
+.address-left .col-6 {
+  flex: 1;
+}
+
+.address-left select,
+.address-right select,
+.address-row select {
+  width: 100%;
+  height: 2.75rem;
+  border-radius: 0.5rem;
+  border: 0.5px solid #bfbfbf;
+  padding: 0 0.75rem;
+}
+
+.map-wrapper {
+  width: 100%;
+  height: 11.25rem; /* 180px */
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.map-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .address-row {
+    flex-direction: column;
+  }
+  .address-right {
+    width: 100%;
+  }
+}
 .tag-input {
   display: flex;
   gap: 0.5rem;
